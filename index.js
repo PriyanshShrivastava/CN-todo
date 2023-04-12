@@ -33,6 +33,8 @@ const connectDB = async () => {
 // connect to db
 connectDB();
 
+// Serving normal get request
+
 app.get("/", function (req, res) {
   Tasks.find({}).then((tasks) =>
     res.render("list", {
@@ -42,6 +44,7 @@ app.get("/", function (req, res) {
   );
 });
 
+// handling adding task
 app.post("/create-task", function (req, res) {
   Tasks.create({
     description: req.body.description,
@@ -57,6 +60,20 @@ app.post("/create-task", function (req, res) {
       return;
     });
 });
+
+// handling delete task
+app.post("/delete-task", function (req, res) {
+  let id = req.body.id;
+
+  Tasks.findByIdAndDelete(id)
+    .then((_) => res.redirect("back"))
+    .catch((err) => {
+      console.error(err);
+      return;
+    });
+});
+
+// setting port value
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, function (err) {
