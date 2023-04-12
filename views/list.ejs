@@ -4,14 +4,74 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <
-    <title><%= locals.title></title>
-    >
-    <link rel="stylesheet" href="/css/style.css" />
+    
+    <title><%= locals.title %></title>
+   
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="container">
       <h1>To Do List</h1>
+      <form class="form" action="/create-task" method="post">
+        <div class="description">
+          <label>Description</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="Enter your task."
+          />
+        </div>
+        <div class="other-desc-box">
+          <div class="category">
+            <label for="category">CATEGORY</label>
+            <select name="category" id="category" class="category-dropdown">
+              <option value="personal">Personal</option>
+              <option value="work">Work</option>
+              <option value="school">School</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="dueDate">
+            <label for="dueDate">DUE DATE</label>
+            <input
+              type="date"
+              name="dueDate"
+              id="dueDate"
+              class="dueDate-select"
+            />
+          </div>
+        </div>
+        <div class="btn-container">
+          <button type="submit" class="add-button">Add Task</button>
+          
+        </div>
+      </form>
+      <form action="/delete-task" method="post">
+                <% for(task of tasks_list) { %>
+                    <input type="checkbox" name="id" id="<%=task._id%>" value="<%=task._id%>" class="task-checkbox">
+                    <label for="<%=task._id%>" class="tasks-list-section">
+                        <div>
+                            <p>
+                                <%=task.description%>
+                            </p>
+                            <p>
+                                <%=task.dueDate%>
+                            </p>
+                        </div>
+                        <div class="task-list-category">
+                            <p>
+                                <%=task.category%>
+                            </p>
+                        </div>
+
+                    </label><br>
+                    <%} %>
+        </div>
+        <button type="submit" class="delete-button">Delete Task</button>
+        </form>
     </div>
+
   </body>
 </html>
