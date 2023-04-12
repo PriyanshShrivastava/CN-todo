@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+
+    <!-- Main container  -->
     <div class="container">
       <h1 class="title">To Do List</h1>
+      <!-- Create task form  -->
       <form class="form" action="/create-task" method="post">
         <div class="description">
           <label>Description</label>
@@ -49,6 +52,8 @@
         <button type="submit" class="delete-button" form="delete-form">Delete Task <i class="fa-solid fa-trash"></i></button>
         </div>
       </form>
+
+      <!-- Delete task form  -->
       <form action="/delete-task" method="post" class="tasklist-form" id="delete-form">
                 <% for(task of tasks_list) { %>
                    
@@ -56,15 +61,18 @@
                        <input type="checkbox" name="id" id="<%=task._id%>" value="<%=task._id%>" class="task-checkbox">
                         <div class="task-box">
                             <p >
+                              <!-- Showing Description  -->
                                 <%=task.description%>
                             </p>
                             <p class="taskdue-box">
                                 <i class="fa-solid fa-calendar-days task-calender"></i></i> 
+                                 <!-- Showing Duedate  -->
                                 <span><%= task.dueDate%> </span>
                             </p>
                         </div>
                         <div class="task-list-category">
                             <p>
+                                  <!-- Showing Category  -->
                                 <%=task.category%>
                             </p>
                         </div>
